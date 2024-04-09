@@ -1,0 +1,19 @@
+@typeparam TItem
+
+@if (Todos != null)
+{
+    <ul>
+        @foreach (var todo in Todos)
+        {
+            <li>
+                <input type="checkbox" @bind="todo.IsDone" />
+                <span style="@(todo.IsDone ? "text-decoration: line-through;" : "")">@todo.Title</span>
+            </li>
+        }
+    </ul>
+}
+
+@code {
+    [Parameter]
+    public List<TodoItem> Todos { get; set; }
+}

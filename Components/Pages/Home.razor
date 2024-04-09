@@ -9,30 +9,12 @@
 
 <AddTodo OnAdd="@AddTodoItem" />
 
-<ul>
-    @foreach (var todo in todos)
-    {
-        <li>
-            <input type="checkbox" @bind="todo.IsDone" />
-            <input @bind="todo.Title" />
-        </li>
-    }
-</ul>
+<TodoList TItem="TodoItem" Todos="@todos" />
 
-<footer>
-    <div class="info">
-        <div>@todos.Count(todo => !todo.IsDone) item left!</div>
-        <div class="status">
-            <div>All</div>
-            <div>Active</div>
-            <div>Completed</div>
-        </div>
-        <div class="clear">Clear completed</div>
-    </div>
-</footer>
+<Footer TodosLeftCount="@TodosLeftCount" />
 
 @code {
-    private List<TodoItem> todos = new();
+    private List<TodoItem> todos = new List<TodoItem>();
 
     async Task AddTodoItem(string newTodoTitle)
     {
@@ -40,5 +22,10 @@
         {
             todos.Add(new TodoItem { Title = newTodoTitle });
         }
+    }
+
+    private int TodosLeftCount()
+    {
+        return todos.Count(todo => !todo.IsDone);
     }
 }

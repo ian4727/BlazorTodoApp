@@ -1,0 +1,16 @@
+<footer>
+    <div class="info">
+        <div>@TodosLeftCount() item left!</div>
+        <div class="status">
+            <div>All</div>
+            <div>Active</div>
+            <div>Completed</div>
+        </div>
+        <div class="clear">Clear completed</div>
+    </div>
+</footer>
+
+@code {
+    [Parameter]
+    public Func<int> TodosLeftCount { get; set; }
+}
