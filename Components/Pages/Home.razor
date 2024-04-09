@@ -1,0 +1,47 @@
+﻿@page "/"
+@* @using BlazorApp.Components *@
+
+@rendermode InteractiveServer
+
+<PageTitle>Blazor Todo App</PageTitle>
+
+<h1>todos</h1>
+
+<input @bind="newTodo" placeholder="What needs to be done?"/>
+<button @onclick="AddTodo">Add todo</button>
+
+<ul>
+    @foreach (var todo in todos)
+    {
+        <li>
+            <input type="checkbox" @bind="todo.IsDone" />
+            <input @bind="todo.Title" />
+        </li>
+    }
+</ul>
+
+<footer>
+    <div class="info">
+        <div>@todos.Count(todo => !todo.IsDone) item left!</div>
+        <div class="status">
+            <div>All</div>
+            <div>Active</div>
+            <div>Completed</div>
+        </div>
+        <div class="clear">Clear completed</div>
+    </div>
+</footer>
+
+@code {
+    private List<TodoItem> todos = new();
+    string newTodo = "";
+
+    void AddTodo()
+    {
+        if (!string.IsNullOrWhiteSpace(newTodo))
+        {
+            todos.Add(new TodoItem { Title = newTodo });
+            newTodo = string.Empty;
+        }
+    }
+}
