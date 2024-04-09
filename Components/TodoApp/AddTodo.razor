@@ -1,0 +1,21 @@
+<div class="add-todo">
+    <input @bind="newTodoTitle" placeholder="What needs to be done?" />
+    <button @onclick="AddTodoAsync">Add todo</button>
+</div>
+
+@code {
+    private string newTodoTitle = "";
+
+    [Parameter]
+    public EventCallback<string> OnAdd { get; set; }
+
+    private async Task AddTodoAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(newTodoTitle))
+        {
+            await OnAdd.InvokeAsync(newTodoTitle);
+            newTodoTitle = string.Empty;
+        }
+    }
+
+}

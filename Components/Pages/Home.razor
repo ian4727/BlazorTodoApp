@@ -1,5 +1,5 @@
 ﻿@page "/"
-@* @using BlazorApp.Components *@
+@using BlazorTodoApp.Components.TodoApp
 
 @rendermode InteractiveServer
 
@@ -7,8 +7,7 @@
 
 <h1>todos</h1>
 
-<input @bind="newTodo" placeholder="What needs to be done?"/>
-<button @onclick="AddTodo">Add todo</button>
+<AddTodo OnAdd="@AddTodoItem" />
 
 <ul>
     @foreach (var todo in todos)
@@ -34,14 +33,12 @@
 
 @code {
     private List<TodoItem> todos = new();
-    string newTodo = "";
 
-    void AddTodo()
+    async Task AddTodoItem(string newTodoTitle)
     {
-        if (!string.IsNullOrWhiteSpace(newTodo))
+        if (!string.IsNullOrWhiteSpace(newTodoTitle))
         {
-            todos.Add(new TodoItem { Title = newTodo });
-            newTodo = string.Empty;
+            todos.Add(new TodoItem { Title = newTodoTitle });
         }
     }
 }
