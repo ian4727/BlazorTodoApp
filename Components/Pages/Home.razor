@@ -3,6 +3,8 @@
 
 @rendermode InteractiveServer
 
+@inject IJSRuntime JSRuntime
+
 <PageTitle>Blazor Todo App</PageTitle>
 
 <h1>todos</h1>
@@ -14,8 +16,6 @@
 <Footer TodosLeftCount="@TodosLeftCount" />
 
 @code {
-    private List<TodoItem> todos = new List<TodoItem>();
-
     async Task AddTodoItem(string newTodoTitle)
     {
         if (!string.IsNullOrWhiteSpace(newTodoTitle))
@@ -27,5 +27,30 @@
     private int TodosLeftCount()
     {
         return todos.Count(todo => !todo.IsDone);
+    }
+
+    private List<TodoItem> todos = new List<TodoItem>();
+
+    private async Task<string> LoadItemFromLocalStorage(string key)
+    {
+        return await JSRuntime.InvokeAsync<string>("getItem", key);
+    }
+
+    private async Task SaveItemToLocalStorage(string key, string value)
+    {
+        await JSRuntime.InvokeVoidAsync("setItem", key, value);
+    }
+    
+
+    private async Task SaveAndLoadFromLocalStorage()
+    {
+        // Save item to local storage
+        await SaveItemToLocalStorage("todoItem", "Example Todo Item");
+
+        // Load item from local storage
+        var loadedItem = await LoadItemFromLocalStorage("todoItem");
+
+        // Output loaded item
+        Console.WriteLine("Loaded item from local storage: " + loadedItem);
     }
 }

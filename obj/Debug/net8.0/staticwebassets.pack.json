@@ -9,12 +9,8 @@
       "PackagePath": "staticwebassets/app.css"
     },
     {
-      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/bootstrap/bootstrap.min.css",
-      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css"
-    },
-    {
-      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/bootstrap/bootstrap.min.css.map",
-      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css.map"
+      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/app.js",
+      "PackagePath": "staticwebassets/app.js"
     },
     {
       "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/favicon.png",

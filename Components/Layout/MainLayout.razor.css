@@ -94,3 +94,12 @@ main {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+.info {
+    display: flex;
+    align-items: center;
+}
+
+h1 {
+    color: maroon;
+}

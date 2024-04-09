@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UVxuUmBISCYbuQUzQee8sPW4WItW5NEuswDfLKRWQKg=",
+  "Hash": "xAUF3l0XHhRkkGKawZ8IyIR87xckpCAUSyezYdlmvdo=",
   "Source": "BlazorTodoApp",
   "BasePath": "_content/BlazorTodoApp",
   "Mode": "Default",
@@ -74,12 +74,12 @@
       "OriginalItemSpec": "wwwroot/app.css"
     },
     {
-      "Identity": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/bootstrap/bootstrap.min.css",
+      "Identity": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/app.js",
       "SourceId": "BlazorTodoApp",
       "SourceType": "Discovered",
       "ContentRoot": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/",
       "BasePath": "_content/BlazorTodoApp",
-      "RelativePath": "bootstrap/bootstrap.min.css",
+      "RelativePath": "app.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -90,26 +90,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/bootstrap/bootstrap.min.css"
-    },
-    {
-      "Identity": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/bootstrap/bootstrap.min.css.map",
-      "SourceId": "BlazorTodoApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/",
-      "BasePath": "_content/BlazorTodoApp",
-      "RelativePath": "bootstrap/bootstrap.min.css.map",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/bootstrap/bootstrap.min.css.map"
+      "OriginalItemSpec": "wwwroot/app.js"
     },
     {
       "Identity": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/favicon.png",

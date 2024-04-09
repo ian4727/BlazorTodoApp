@@ -95,3 +95,12 @@ main[b-xpzi86ey6x] {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+.info[b-xpzi86ey6x] {
+    display: flex;
+    align-items: center;
+}
+
+h1[b-xpzi86ey6x] {
+    color: maroon;
+}
