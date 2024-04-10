@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "CBZSG/H3IjfczO5kw3IXNASVA5x1dpnLoYip0m5AZ5A4WPwXzmad0N5R0Q8U1DL5U/Ox2MqBcBh7LXd9KoJ1JA==",
+  "dgSpecHash": "sSa2A3PRCQ7XwJTTk5ftFR18rWjEgd7tasNeFHzQ3g437UwMm6i2jXZXqV0Lq/hh2zXmYW9BooR1YTDm+1Yi3Q==",
   "success": true,
   "projectFilePath": "/home/ian/projects/C#/BlazorTodoApp/BlazorTodoApp.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/ian/.nuget/packages/system.text.encodings.web/8.0.0/system.text.encodings.web.8.0.0.nupkg.sha512",
+    "/home/ian/.nuget/packages/system.text.json/8.0.3/system.text.json.8.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

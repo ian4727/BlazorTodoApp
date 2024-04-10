@@ -9,16 +9,32 @@
       "PackagePath": "staticwebassets/app.css"
     },
     {
-      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/bootstrap/bootstrap.min.css",
-      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css"
+      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/dist/app.css",
+      "PackagePath": "staticwebassets/dist/app.css"
     },
     {
-      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/bootstrap/bootstrap.min.css.map",
-      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css.map"
+      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/dist/app.js",
+      "PackagePath": "staticwebassets/dist/app.js"
     },
     {
       "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/favicon.png",
       "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/scripts/app.ts",
+      "PackagePath": "staticwebassets/scripts/app.ts"
+    },
+    {
+      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/scripts/global.d.ts",
+      "PackagePath": "staticwebassets/scripts/global.d.ts"
+    },
+    {
+      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/scripts/tsconfig.json",
+      "PackagePath": "staticwebassets/scripts/tsconfig.json"
+    },
+    {
+      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/tailwind.config.js",
+      "PackagePath": "staticwebassets/tailwind.config.js"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.BlazorTodoApp.Microsoft.AspNetCore.StaticWebAssets.props",
