@@ -1,0 +1,50 @@
+@using BlazorTodoApp.Components.Todo
+@using System.Text.Json
+@inject IJSRuntime JSRuntime
+@rendermode InteractiveServer
+
+<footer>
+    <div class="info">
+        <div>@Todos.Count(todo => !todo.IsDone) item left!</div>
+        <div class="status">
+            <div class="status-category" @onclick="() => FilterTodos(Filter.All)">All</div>
+            <div class="status-category" @onclick="() => FilterTodos(Filter.Active)">Active</div>
+            <div class="status-category" @onclick="() => FilterTodos(Filter.Completed)">Completed</div>
+        </div>
+        <div class="clear" @onclick="ClearCompletedTodos">Clear completed</div>
+    </div>
+</footer>
+
+@code {
+    [Parameter]
+    public List<TodoItem> Todos { get; set; }
+
+    [Parameter]
+    public EventCallback<List<TodoItem>> TodosChanged { get; set; }
+
+    private async Task FilterTodos(Filter filter)
+    {
+        await TodosChanged.InvokeAsync(Todos);
+    }
+
+    private async Task ClearCompletedTodos()
+    {
+        Todos = Todos.Where(todo => !todo.IsDone).ToList();
+        await SaveToLocalStorage();
+    }
+
+    // Save tasks to local storage
+    private async Task SaveToLocalStorage()
+    {
+        var todosJson = JsonSerializer.Serialize(Todos);
+        await JSRuntime.InvokeVoidAsync("setItem", "todos", todosJson);
+        await TodosChanged.InvokeAsync(Todos);
+    }
+
+    public enum Filter
+    {
+        All,
+        Active,
+        Completed
+    }
+}

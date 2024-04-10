@@ -1,139 +1,64 @@
 ﻿@page "/"
 @using System.Text.Json
+@using BlazorTodoApp.Components.Todo
 @inject IJSRuntime JSRuntime
 @rendermode InteractiveServer
 
 <header>
     <h1>todos</h1>
-    <input class="todo-input" @bind="newTodo" @onkeydown="@(e => AddTodo(e))" placeholder="What needs to be done"/>
+    <AddNewTodo Todos="todos" TodosChanged="UpdateTodos" />
 </header>
 
 <main>
-    <ul>
-        @foreach (var todo in todos)
-        {
-            <li class="todo-li">
-                <input type="checkbox" @bind="todo.IsDone" placeholder="What needs to be done?"/>
-                @if (todo.IsEditing)
-                {
-                    <input class="todo-edit" @bind="todo.Title" @onkeydown="@(e => OnEditKeyPress(e, todo))" />
-                }
-                else
-                {
-                    <p class="todo-item" @ondblclick="() => EditTodo(todo)">@todo.Title</p>
-                }
-                <div class="btn btn-danger" @onclick="() => DeleteTodo(todo)">
-                    <div>x</div>
-                </div> 
-            </li>
-        }
-    </ul>
+    <TodoList Todos="todos" TodosChanged="UpdateTodos" />
 </main>
 
-<footer>
-    <div class="info">
-        <div>@todos.Count(todo => !todo.IsDone) item left!</div>
-        <div class="status">
-            <div class="status-category" @onclick="() => FilterTodos(Filter.All)">All</div>
-            <div class="status-category" @onclick="() => FilterTodos(Filter.Active)">Active</div>
-            <div class="status-category" @onclick="() => FilterTodos(Filter.Completed)">Completed</div>
-        </div>
-        <div class="clear" @onclick="ClearCompletedTodos">Clear completed</div>
-    </div>
-</footer>
+<TodoFooter Todos="todos" TodosChanged="UpdateTodos" />
 
 @code {
-    private List<TodoItem> todos = new();
-    private string newTodo = "";
-    private Filter currentFilter = Filter.All;
+    private List<TodoItem> todos = new List<TodoItem>();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            string? storedTodosJson = await JSRuntime.InvokeAsync<string>("getItem", "todos");
-            if (!string.IsNullOrEmpty(storedTodosJson))
+            string storedTodosJson = await JSRuntime.InvokeAsync<string>("getItem", "todos") ?? "";
+            DeserializeTodos(storedTodosJson);
+        }
+    }
+
+    private void DeserializeTodos(string storedTodosJson)
+    {
+        if (!string.IsNullOrEmpty(storedTodosJson))
+        {
+            try
             {
-                todos = JsonSerializer.Deserialize<List<TodoItem>>(storedTodosJson);
-                StateHasChanged(); // Ensure re-render after state update
+                todos = JsonSerializer.Deserialize<List<TodoItem>>(storedTodosJson) ?? new List<TodoItem>();
+                StateHasChanged();
+            }
+            catch (JsonException)
+            {
+                Console.WriteLine("Failed to deserialize todos from JSON.");
             }
         }
     }
 
-    private bool ShowTodo(TodoItem todo)
+    private async Task UpdateTodos(List<TodoItem> updatedTodos)
     {
-        switch (currentFilter)
-        {
-            case Filter.All:
-                return true;
-            case Filter.Active:
-                return !todo.IsDone;
-            case Filter.Completed:
-                return todo.IsDone;
-            default:
-                return true;
-        }
-    }
-
-    private void FilterTodos(Filter filter)
-    {
-        currentFilter = filter;
+        todos = updatedTodos;
         StateHasChanged();
+        await SaveToLocalStorage();
     }
 
-    private void ClearCompletedTodos()
+    private async Task ClearCompletedTodos()
     {
-        todos = todos.Where(todo => !todo.IsDone).ToList();
-        SaveToLocalStorage();
+        todos.RemoveAll(todo => todo.IsDone);
+        await SaveToLocalStorage();
     }
 
-    public enum Filter
-    {
-        All,
-        Active,
-        Completed
-    }
-
-    void AddTodo(KeyboardEventArgs e)
-    {
-        if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(newTodo))
-        {
-            todos.Add(new TodoItem { Title = newTodo });
-            newTodo = string.Empty;
-            SaveToLocalStorage();
-            StateHasChanged();
-        }
-    }
-
-    void EditTodo(TodoItem todo)
-    {
-        foreach (var item in todos)
-        {
-            item.IsEditing = item == todo;
-            StateHasChanged();
-        }
-    }
-
-    void OnEditKeyPress(KeyboardEventArgs e, TodoItem todo)
-    {
-        if (e.Key == "Enter")
-        {
-            todo.IsEditing = false;
-            SaveToLocalStorage();
-            StateHasChanged();
-        }
-    }
-
-    void DeleteTodo(TodoItem todo)
-    {
-        todos.Remove(todo);
-        SaveToLocalStorage();
-    }
-
-    // Save tasks to local storage
     private async Task SaveToLocalStorage()
     {
-        var todosJson = JsonSerializer.Serialize(todos);
+        string todosJson = JsonSerializer.Serialize(todos);
         await JSRuntime.InvokeVoidAsync("setItem", "todos", todosJson);
     }
 }

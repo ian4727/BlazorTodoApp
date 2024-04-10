@@ -1,0 +1,21 @@
+<input class="todo-input" @bind="newTodo" @onkeydown="@(e => AddTodo(e))" placeholder="What needs to be done"/>
+
+@code {
+    [Parameter]
+    public List<TodoItem> Todos { get; set; }
+
+    [Parameter]
+    public EventCallback<List<TodoItem>> TodosChanged { get; set; }
+
+    private string newTodo = "";
+
+    private async Task AddTodo(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(newTodo))
+        {
+            Todos.Add(new TodoItem { Title = newTodo });
+            newTodo = string.Empty;
+            await TodosChanged.InvokeAsync(Todos);
+        }
+    }
+}
