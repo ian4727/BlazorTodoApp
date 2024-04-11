@@ -1,4 +1,10 @@
-<input class="todo-input" @bind="newTodo" @onkeydown="@(e => AddTodo(e))" placeholder="What needs to be done" @focus="@(() => newTodo = "")"/>
+<input
+    class="todo-input"
+    @bind="newTodo"
+    @onkeydown="@(e => AddTodo(e))"
+    placeholder="What needs to be done"
+    @focus="@(() => newTodo = "")"
+/>
 
 @code {
     [Parameter]

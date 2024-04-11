@@ -1,5 +1,6 @@
 @using BlazorTodoApp.Components.Todo
 @using System.Text.Json
+
 @inject IJSRuntime JSRuntime
 @rendermode InteractiveServer
 
@@ -11,7 +12,10 @@
             <div class="status-category" @onclick="() => FilterTodos(Filter.Active)">Active</div>
             <div class="status-category" @onclick="() => FilterTodos(Filter.Completed)">Completed</div>
         </div>
-        <div class="clear" @onclick="ClearCompletedTodos">Clear completed</div>
+        <div
+            class="clear"
+            @onclick="ClearCompletedTodos">Clear completed
+        </div>
     </div>
 </footer>
 

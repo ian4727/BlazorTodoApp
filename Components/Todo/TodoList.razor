@@ -1,21 +1,35 @@
 @using BlazorTodoApp.Components.Todo
 @using System.Text.Json
+
 @inject IJSRuntime JSRuntime
 
 <ul>
     @foreach (var todo in Todos)
     {
         <li class="todo-li">
-            <input type="checkbox" @bind="todo.IsDone" placeholder="What needs to be done?"/>
+            <input
+                type="checkbox"
+                @bind="todo.IsDone"
+                placeholder="What needs to be done?"
+            />
             @if (todo.IsEditing)
             {
-                <input class="todo-edit" @bind="todo.Title" @onkeydown="@(e => OnEditKeyPress(e, todo))" />
+                <input
+                    class="todo-edit"
+                    @bind="todo.Title"
+                    @onkeydown="@(e => OnEditKeyPress(e, todo))"
+                />
             }
             else
             {
-                <p class="todo-item" @ondblclick="() => EditTodo(todo)">@todo.Title</p>
+                <p
+                    class="todo-item"
+                    @ondblclick="() => EditTodo(todo)">@todo.Title
+                </p>
             }
-            <div class="btn btn-danger" @onclick="() => DeleteTodo(todo)">
+            <div
+                class="btn btn-danger"
+                @onclick="() => DeleteTodo(todo)">
                 <div>x</div>
             </div> 
         </li>
