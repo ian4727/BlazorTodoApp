@@ -5,8 +5,8 @@
 @inject IJSRuntime JSRuntime
 @rendermode InteractiveServer
 
-<header>
-    <h1>todos</h1>
+<header class="flex justify-center items-center h-screen">
+    <h1 class="text-red-400 ">todos</h1>
     <AddNewTodo Todos="todos" TodosChanged="UpdateTodos" />
 </header>
 
@@ -14,7 +14,10 @@
     <TodoList Todos="todos" TodosChanged="UpdateTodos" />
 </main>
 
-<TodoFooter Todos="todos" TodosChanged="UpdateTodos" />
+<footer>
+    <TodoFooter Todos="todos" TodosChanged="UpdateTodos" />
+</footer>
+
 
 @code {
     private List<TodoItem> todos = new List<TodoItem>();

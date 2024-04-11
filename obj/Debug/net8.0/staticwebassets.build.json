@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lMzP6y+zJ3gzWJg31O+6H3oy9dE7WfdaHYAc1NrqO+I=",
+  "Hash": "RiODlITny2IAhVukYU183ZyHwyqoTw4EKypqXFIN6Kk=",
   "Source": "BlazorTodoApp",
   "BasePath": "_content/BlazorTodoApp",
   "Mode": "Default",
@@ -72,25 +72,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/app.css"
-    },
-    {
-      "Identity": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/dist/app.css",
-      "SourceId": "BlazorTodoApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/",
-      "BasePath": "_content/BlazorTodoApp",
-      "RelativePath": "dist/app.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/dist/app.css"
     },
     {
       "Identity": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/dist/app.js",
@@ -186,6 +167,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/scripts/tsconfig.json"
+    },
+    {
+      "Identity": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/styles/app.css",
+      "SourceId": "BlazorTodoApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/",
+      "BasePath": "_content/BlazorTodoApp",
+      "RelativePath": "styles/app.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/styles/app.css"
     },
     {
       "Identity": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/tailwind.config.js",

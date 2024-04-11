@@ -572,7 +572,7 @@ video {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-header{
+/* header{
     display: inline-block;
 }
 
@@ -612,9 +612,9 @@ h1{
 
 .todo-input::placeholder {
   opacity: 0.5; /* Reduce opacity to make it appear faded */
-  transition: opacity 0.3s ease-in-out; /* Add a smooth transition */
+  /* transition: opacity 0.3s ease-in-out; 
 }
 
 .todo-input:focus::placeholder {
-  opacity: 0; /* Hide placeholder on focus */
-}
+  opacity: 0; 
+} */

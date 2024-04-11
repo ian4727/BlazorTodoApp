@@ -9,10 +9,6 @@
       "PackagePath": "staticwebassets/app.css"
     },
     {
-      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/dist/app.css",
-      "PackagePath": "staticwebassets/dist/app.css"
-    },
-    {
       "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/dist/app.js",
       "PackagePath": "staticwebassets/dist/app.js"
     },
@@ -31,6 +27,10 @@
     {
       "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/scripts/tsconfig.json",
       "PackagePath": "staticwebassets/scripts/tsconfig.json"
+    },
+    {
+      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/styles/app.css",
+      "PackagePath": "staticwebassets/styles/app.css"
     },
     {
       "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/tailwind.config.js",
