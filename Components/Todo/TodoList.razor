@@ -24,7 +24,7 @@
 
 @code {
     [Parameter]
-    public List<TodoItem> Todos { get; set; }
+    public List<TodoItem>? Todos { get; set; }
 
     [Parameter]
     public EventCallback<List<TodoItem>> TodosChanged { get; set; }

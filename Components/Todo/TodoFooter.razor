@@ -5,7 +5,7 @@
 
 <footer>
     <div class="info">
-        <div>@Todos.Count(todo => !todo.IsDone) item left!</div>
+        <div>@(Todos != null ? Todos.Count(todo => !todo.IsDone) : 0) item left!</div>
         <div class="status">
             <div class="status-category" @onclick="() => FilterTodos(Filter.All)">All</div>
             <div class="status-category" @onclick="() => FilterTodos(Filter.Active)">Active</div>
@@ -16,29 +16,45 @@
 </footer>
 
 @code {
-    [Parameter]
-    public List<TodoItem> Todos { get; set; }
-
-    [Parameter]
-    public EventCallback<List<TodoItem>> TodosChanged { get; set; }
+    [Parameter] public List<TodoItem>? Todos { get; set; }
+    [Parameter] public EventCallback<List<TodoItem>> TodosChanged { get; set; }
 
     private async Task FilterTodos(Filter filter)
     {
-        await TodosChanged.InvokeAsync(Todos);
+        if (Todos != null)
+        {
+            switch (filter)
+            {
+                case Filter.All:
+                    break;
+                case Filter.Active:
+                    Todos = Todos.Where(todo => !todo.IsDone).ToList();
+                    break;
+                case Filter.Completed:
+                    Todos = Todos.Where(todo => todo.IsDone).ToList();
+                    break;
+            }
+            await SaveToLocalStorage();
+        }
     }
 
     private async Task ClearCompletedTodos()
     {
-        Todos = Todos.Where(todo => !todo.IsDone).ToList();
-        await SaveToLocalStorage();
+        if (Todos != null)
+        {
+            Todos = Todos.Where(todo => !todo.IsDone).ToList();
+            await SaveToLocalStorage();
+        }
     }
 
-    // Save tasks to local storage
     private async Task SaveToLocalStorage()
     {
-        var todosJson = JsonSerializer.Serialize(Todos);
-        await JSRuntime.InvokeVoidAsync("setItem", "todos", todosJson);
-        await TodosChanged.InvokeAsync(Todos);
+        if (Todos != null)
+        {
+            var todosJson = JsonSerializer.Serialize(Todos);
+            await JSRuntime.InvokeVoidAsync("setItem", "todos", todosJson);
+            await TodosChanged.InvokeAsync(Todos);
+        }
     }
 
     public enum Filter

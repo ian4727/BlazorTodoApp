@@ -1,8 +1,8 @@
-<input class="todo-input" @bind="newTodo" @onkeydown="@(e => AddTodo(e))" placeholder="What needs to be done"/>
+<input class="todo-input" @bind="newTodo" @onkeydown="@(e => AddTodo(e))" placeholder="What needs to be done" @focus="@(() => newTodo = "")"/>
 
 @code {
     [Parameter]
-    public List<TodoItem> Todos { get; set; }
+    public List<TodoItem>? Todos { get; set; }
 
     [Parameter]
     public EventCallback<List<TodoItem>> TodosChanged { get; set; }
@@ -13,9 +13,10 @@
     {
         if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(newTodo))
         {
-            Todos.Add(new TodoItem { Title = newTodo });
+            var updatedTodos = new List<TodoItem>(Todos); // Create a new instance of the list
+            updatedTodos.Add(new TodoItem { Title = newTodo }); // Add the new todo item
             newTodo = string.Empty;
-            await TodosChanged.InvokeAsync(Todos);
+            await TodosChanged.InvokeAsync(updatedTodos); // Invoke the callback with the updated list
         }
     }
 }
