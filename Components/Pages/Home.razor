@@ -6,31 +6,28 @@
 @rendermode InteractiveServer
 
 <header class="flex items-center justify-center">
-        <h1 class="text-pink-800 text-5xl p-5">todos</h1>    
+    <h1 class="text-pink-800 text-5xl p-5">todos</h1>    
 </header>
 
 <main class="flex shadow">
     <div class="bg-white">
-        <AddNewTodo Todos="todos" TodosChanged="UpdateTodos" />
-        <TodoList Todos="todos" TodosChanged="UpdateTodos" />  
+        <AddNewTodo Todos="Todos" TodosChanged="UpdateTodos" />
+        <TodoList Todos="Todos" TodosChanged="UpdateTodos" />  
     </div>
 </main>
 
 <footer class="bg-white shadow p-3">
-    <TodoFooter Todos="todos" TodosChanged="UpdateTodos" />
+    <TodoFooter Todos="Todos" TodosChanged="UpdateTodos" />
 </footer>
 
-
-
-
 @code {
-    private List<TodoItem>? todos = new List<TodoItem>();
+    private List<TodoItem> Todos { get; set; } = [];
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            string storedTodosJson = await JSRuntime.InvokeAsync<string>("getItem", "todos") ?? "";
+            string storedTodosJson = (await JSRuntime.InvokeAsync<string?>("getItem", "todos")) ?? string.Empty;
             DeserializeTodos(storedTodosJson);
         }
     }
@@ -41,8 +38,8 @@
         {
             try
             {
-                todos = JsonSerializer.Deserialize<List<TodoItem>>(storedTodosJson) ?? new List<TodoItem>();
-                StateHasChanged();
+                Todos = JsonSerializer.Deserialize<List<TodoItem>>(storedTodosJson) ?? [];
+                InvokeAsync(StateHasChanged);
             }
             catch (JsonException)
             {
@@ -53,20 +50,20 @@
 
     private async Task UpdateTodos(List<TodoItem> updatedTodos)
     {
-        todos = updatedTodos;
+        Todos = updatedTodos;
         StateHasChanged();
         await SaveToLocalStorage();
     }
 
     private async Task ClearCompletedTodos()
     {
-        todos.RemoveAll(todo => todo.IsDone);
+        Todos.RemoveAll(todo => todo.IsDone);
         await SaveToLocalStorage();
     }
 
     private async Task SaveToLocalStorage()
     {
-        string todosJson = JsonSerializer.Serialize(todos);
+        string todosJson = JsonSerializer.Serialize(Todos);
         await JSRuntime.InvokeVoidAsync("setItem", "todos", todosJson);
     }
 }

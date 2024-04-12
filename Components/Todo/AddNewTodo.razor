@@ -1,7 +1,7 @@
 <input
     class="bg-white border-solid border-pink-800 h-65 italic mb-8 items-center"
     @bind="newTodo"
-    @onkeydown="@(e => AddTodo(e))"
+    @onkeydown="AddTodo"
     placeholder="What needs to be done"
     @focus="@(() => newTodo = "")"
 />
@@ -15,11 +15,11 @@
 
     private string newTodo = "";
 
-    private async Task AddTodo(KeyboardEventArgs e)
+    private async void AddTodo(KeyboardEventArgs e)
     {
         if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(newTodo))
         {
-            var updatedTodos = new List<TodoItem>(Todos); // Create a new instance of the list
+            List<TodoItem> updatedTodos = [..Todos]; // Create a new instance of the list
             updatedTodos.Add(new TodoItem { Title = newTodo }); // Add the new todo item
             newTodo = string.Empty;
             await TodosChanged.InvokeAsync(updatedTodos); // Invoke the callback with the updated list
