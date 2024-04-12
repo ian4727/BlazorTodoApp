@@ -4,20 +4,20 @@
 @inject IJSRuntime JSRuntime
 @rendermode InteractiveServer
 
-<footer>
-    <div class="info">
-        <div>@(Todos != null ? Todos.Count(todo => !todo.IsDone) : 0) item left!</div>
-        <div class="status">
-            <div class="status-category" @onclick="() => FilterTodos(Filter.All)">All</div>
-            <div class="status-category" @onclick="() => FilterTodos(Filter.Active)">Active</div>
-            <div class="status-category" @onclick="() => FilterTodos(Filter.Completed)">Completed</div>
+    <div class="flex items-center justify-between text-8xs"
+         :class="{ 'hidden': Todos == null || Todos.Count == 0 }"
+    >
+        <div class="mr-10">@(Todos != null ? Todos.Count(todo => !todo.IsDone) : 0) item left!</div>
+        <div class="flex items-center justify-between mr-10">
+            <div class="status-category mr-3" @onclick="() => FilterTodos(Filter.All)">All</div>
+            <div class="status-category mr-3" @onclick="() => FilterTodos(Filter.Active)">Active</div>
+            <div class="status-category mr-3" @onclick="() => FilterTodos(Filter.Completed)">Completed</div>
         </div>
         <div
-            class="clear"
             @onclick="ClearCompletedTodos">Clear completed
         </div>
     </div>
-</footer>
+
 
 @code {
     [Parameter] public List<TodoItem>? Todos { get; set; }

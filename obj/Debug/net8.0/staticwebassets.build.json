@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RiODlITny2IAhVukYU183ZyHwyqoTw4EKypqXFIN6Kk=",
+  "Hash": "5eJHpCjXtpJcBVAGstDAAgVj2/n/Bl2MRP/69qhNkiY=",
   "Source": "BlazorTodoApp",
   "BasePath": "_content/BlazorTodoApp",
   "Mode": "Default",
@@ -55,12 +55,12 @@
       "OriginalItemSpec": "/home/ian/projects/C#/BlazorTodoApp/obj/Debug/net8.0/scopedcss/projectbundle/BlazorTodoApp.bundle.scp.css"
     },
     {
-      "Identity": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/app.css",
+      "Identity": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/dist/app.css",
       "SourceId": "BlazorTodoApp",
       "SourceType": "Discovered",
       "ContentRoot": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/",
       "BasePath": "_content/BlazorTodoApp",
-      "RelativePath": "app.css",
+      "RelativePath": "dist/app.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -71,7 +71,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/app.css"
+      "OriginalItemSpec": "wwwroot/dist/app.css"
     },
     {
       "Identity": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/dist/app.js",

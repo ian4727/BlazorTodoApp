@@ -5,8 +5,8 @@
       "PackagePath": "staticwebassets/BlazorTodoApp.bundle.scp.css"
     },
     {
-      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/app.css",
-      "PackagePath": "staticwebassets/app.css"
+      "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/dist/app.css",
+      "PackagePath": "staticwebassets/dist/app.css"
     },
     {
       "Id": "/home/ian/projects/C#/BlazorTodoApp/wwwroot/dist/app.js",

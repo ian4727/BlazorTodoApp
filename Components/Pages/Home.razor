@@ -5,22 +5,26 @@
 @inject IJSRuntime JSRuntime
 @rendermode InteractiveServer
 
-<header class="flex justify-center items-center h-screen">
-    <h1 class="text-red-400 ">todos</h1>
-    <AddNewTodo Todos="todos" TodosChanged="UpdateTodos" />
+<header class="flex items-center justify-center">
+        <h1 class="text-pink-800 text-5xl p-5">todos</h1>    
 </header>
 
-<main>
-    <TodoList Todos="todos" TodosChanged="UpdateTodos" />
+<main class="flex shadow">
+    <div class="bg-white">
+        <AddNewTodo Todos="todos" TodosChanged="UpdateTodos" />
+        <TodoList Todos="todos" TodosChanged="UpdateTodos" />  
+    </div>
 </main>
 
-<footer>
+<footer class="bg-white shadow p-3">
     <TodoFooter Todos="todos" TodosChanged="UpdateTodos" />
 </footer>
 
 
+
+
 @code {
-    private List<TodoItem> todos = new List<TodoItem>();
+    private List<TodoItem>? todos = new List<TodoItem>();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

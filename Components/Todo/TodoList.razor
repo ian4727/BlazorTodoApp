@@ -3,36 +3,40 @@
 
 @inject IJSRuntime JSRuntime
 
-<ul>
-    @foreach (var todo in Todos)
+<ul class="border-b border-t border-gray">
+    @if (Todos != null)
     {
-        <li class="todo-li">
-            <input
-                type="checkbox"
-                @bind="todo.IsDone"
-                placeholder="What needs to be done?"
-            />
-            @if (todo.IsEditing)
-            {
+        @foreach (var todo in Todos)
+        {
+            <li class="flex items-center hover:delete-visible mt-5">
                 <input
-                    class="todo-edit"
-                    @bind="todo.Title"
-                    @onkeydown="@(e => OnEditKeyPress(e, todo))"
+                    class="rounded-full border-2 border-green-500 mr-5"
+                    type="checkbox"
+                    @bind="todo.IsDone"
+                    placeholder="What needs to be done?"
                 />
-            }
-            else
-            {
-                <p
-                    class="todo-item"
-                    @ondblclick="() => EditTodo(todo)">@todo.Title
-                </p>
-            }
-            <div
-                class="btn btn-danger"
-                @onclick="() => DeleteTodo(todo)">
-                <div>x</div>
-            </div> 
-        </li>
+                @if (todo.IsEditing)
+                {
+                    <input
+                        class="todo-edit"
+                        @bind="todo.Title"
+                        @onkeydown="@(e => OnEditKeyPress(e, todo))"
+                    />
+                }
+                else
+                {
+                    <p
+                        class="todo-item flex-1"
+                        @ondblclick="() => EditTodo(todo)">@todo.Title
+                    </p>
+                }
+                <div
+                    class="btn hidden"
+                    @onclick="() => DeleteTodo(todo)">
+                    <div>x</div>
+                </div> 
+            </li>
+        }
     }
 </ul>
 
