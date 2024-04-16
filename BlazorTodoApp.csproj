@@ -4,10 +4,18 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>BlazorTodoApp</RootNamespace>
+    <AssemblyName>$(AssemblyName.Replace(' ', '_'))</AssemblyName>
+    <OutputPath>.build/bin</OutputPath>
+    <BaseIntermediateOutputPath>.build/obj</BaseIntermediateOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="8.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components/Controls/" />
   </ItemGroup>
 
 </Project>
