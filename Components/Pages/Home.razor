@@ -1,17 +1,35 @@
 ﻿@page "/"
 @using blazortodoapp.Models;
+@using blazortodoapp.Services;
+@using System.Text.Json;
 @using BlazorTodoApp.Components.Controls;
 
 @rendermode InteractiveServer
 
 <PageTitle>To-do List App</PageTitle>
 
-<TodoList Items="TodoItems"/>
+<TodoList Items="TodoItems" OnChanged="OnTodoListChanged"/>
+
 
 @code {
-    private Dictionary<int, TodoItem> TodoItems = new Dictionary<int, TodoItem>
+    [Inject]
+    public TodoStorageService TodoStorageService { get; set; } = default;
+
+    protected Dictionary<int, TodoItem> TodoItems { get; set; } = [];
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        {1, new TodoItem(1, "Task 1", false, false)},
-    };
+        if(firstRender)
+        {
+            TodoItems = await TodoStorageService.GetTodoAsync();
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    protected async void OnTodoListChanged(TodoItemChangedEventArgs e)
+    {
+        await TodoStorageService.SaveTodosAsync(TodoItems);
+        await InvokeAsync(StateHasChanged);
+    }
     
 }

@@ -1,5 +1,5 @@
 <Project>
     <PropertyGroup>
-        <MSBuildProjectsExtensionPath>.build/obj</MSBuildProjectsExtensionPath>
+        <BaseIntermediateOutputPath>.build/obj</BaseIntermediateOutputPath>
     </PropertyGroup>
 </Project>
