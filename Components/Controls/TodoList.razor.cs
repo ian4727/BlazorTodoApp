@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using blazortodoapp.Models;
-using Microsoft.AspNetCore.Components.Web;
+using static System.ValueTuple;
 
 namespace BlazorTodoApp.Components.Controls;
 
@@ -21,15 +21,16 @@ public class TodoItemChangedEventArgs(TodoItem item, TodoItemChangeType changeTy
 public partial class TodoList
 {
     [Parameter, EditorRequired]
-
     public required Dictionary<int, TodoItem> Items { get; set; }
 
     [Parameter]
-
     public EventCallback<TodoItemChangedEventArgs> OnChanged { get; set; }
 
+    //test code
     [Parameter]
+    public string Filter { get; set; } = "All";
 
+    [Parameter]
     public RenderFragment<TodoItemTemplateData>? ItemTemplate { get; set; }
 
     protected TodoItemTemplateData GetTodoItemTemplateData(TodoItem item)
@@ -52,4 +53,26 @@ public partial class TodoList
         Items.Remove(item.Id);
         OnChanged.InvokeAsync(new TodoItemChangedEventArgs(item, TodoItemChangeType.Remove));
     }   
+
+    //test code
+    protected IEnumerable<KeyValuePair<int, TodoItem>> FilterItems(Dictionary<int, TodoItem> items)
+    {
+        if (Filter == "All")
+        {
+            return items;
+        }
+        else if (Filter == "Active")
+        {
+            return items.Where(item => !item.Value.IsDone);
+        }
+        else if (Filter == "Completed")
+        {
+            return items.Where(item => item.Value.IsDone);
+        }
+        else
+        {
+            // Handle unexpected filter value (optional)
+            return Enumerable.Empty<KeyValuePair<int, TodoItem>>();
+        }
+    }
 }
