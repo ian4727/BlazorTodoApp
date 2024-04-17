@@ -8,12 +8,22 @@
 
 <PageTitle>To-do List App</PageTitle>
 
-<TodoList Items="TodoItems" OnChanged="OnTodoListChanged"/>
-
+<div class="wrapper">
+    <h1 class="text-center mb-4">todos</h1>
+    <div class="todoapp">
+        <TodoInput OnSave="OnTodoInputSave" />
+        <TodoList Items="TodoItems" OnChanged="OnTodoListChanged">
+            <ItemTemplate Context="TemplateData">
+                <Todo TemplateData="TemplateData"/>
+            </ItemTemplate>
+        </TodoList>
+        <TodoFooter Items="TodoItems" OnItemRemove="OnTodoItemRemove" TotalItems="TodoItems.Count" ActiveItems="TodoItems.Values.Count(item => !item.IsDone)" CompletedItems="TodoItems.Values.Count(item => item.IsDone)" />
+    </div>
+</div>
 
 @code {
     [Inject]
-    public TodoStorageService TodoStorageService { get; set; } = default;
+    public TodoStorageService TodoStorageService { get; set; } = default!;
 
     protected Dictionary<int, TodoItem> TodoItems { get; set; } = [];
     
@@ -25,11 +35,22 @@
             await InvokeAsync(StateHasChanged);
         }
     }
-
     protected async void OnTodoListChanged(TodoItemChangedEventArgs e)
     {
         await TodoStorageService.SaveTodosAsync(TodoItems);
         await InvokeAsync(StateHasChanged);
     }
-    
+    protected void OnTodoInputSave(string todo)
+    {
+        int newId = TodoItems.Count > 0 ? TodoItems.Keys.Max() + 1 : 1;
+        TodoItem item = new(newId, todo, false, false);
+        TodoItems.Add(item.Id, item);
+        OnTodoListChanged(new TodoItemChangedEventArgs(item, TodoItemChangeType.Add));
+    } 
+
+    protected void OnTodoItemRemove(TodoItem item)
+    {
+        TodoItems.Remove(item.Id);
+        OnTodoListChanged(new TodoItemChangedEventArgs(item, TodoItemChangeType.Remove));
+    }
 }

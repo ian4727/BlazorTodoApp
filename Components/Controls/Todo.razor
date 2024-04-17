@@ -1,0 +1,28 @@
+<div class="todo">
+    @if(Item.IsEditing)
+            {
+                <input
+                    class="input-edit"
+                    type="text"
+                    @oninput="OnTodoEditingInput"
+                    @onkeypress="OnTodoEditingItemKeyPress"
+                    value="@Item.Title"
+                />
+            }
+            else
+            {
+                <li class="todo-li" @ondblclick="OnTodoItemDbClick">
+                    <input 
+                        class="input-check checkbox-round"
+                        type="checkbox"
+                        @onclick:stopPropagation="true"
+                        @ondblclick:stopPropagation="true"
+                        @onchange="OnTodoItemInputCheckChanged"
+                        checked="@Item.IsDone"
+                    >
+                    <span>@Item.Title</span>
+                    <span class="todo-delete" @onclick="OnTodoItemRemove">x</span>
+                </li>
+            }
+</div>
+    

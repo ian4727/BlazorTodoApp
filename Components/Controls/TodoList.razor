@@ -1,36 +1,15 @@
-<div class="todo-list">
-    <input
-        type="text"
-        placeholder="What needs to be done"
-        @onkeypress="OnTodoInputKeyPress"
-        @bind-value="CurrentTodo"  
-        @bind-value:event="oninput"      
-    >
-    <ul>
+<main class="main">
+    <ul class="todo-list">
         @foreach(var (id, todoItem) in Items)
         {
-            if(todoItem.IsEditing)
+            if(ItemTemplate is null)
             {
-                <input
-                    type="text"
-                    @oninput="@((e) => OnTodoEditingInput(e, todoItem))"
-                    @onkeypress="@((e) => OnTodoEditingItemKeyPress(e, todoItem))"
-                    value="@todoItem.Title"
-                />
+                <li>Please provide a Template</li>
             }
             else
             {
-                <li @ondblclick="@(() => OnTodoItemDbClick(todoItem))">
-                    <input type="checkbox"
-                        @onclick:stopPropagation="true"
-                        @ondblclick:stopPropagation="true"
-                        @onchange="@((e) => OnTodoItemInputCheckChanged(e, todoItem))"
-                        checked="@todoItem.IsDone"
-                    >
-                    <span>@id | @todoItem.Title</span>
-                    <span @onclick="@(() => OnTodoItemRemove(todoItem))">x</span>
-                </li>
-            }   
+                @ItemTemplate(GetTodoItemTemplateData(todoItem))
+            }
         }
     </ul>
-</div>
+</main>

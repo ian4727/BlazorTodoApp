@@ -1,26 +1,22 @@
-// namespace BlazorTodoApp.Components.Controls;
+using System.Reflection.Metadata;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
-// public partial class TodoInput
-// {
-//     [Parameter]
-//     public EventCallback<string> OnAddTodo { get; set; }
+namespace BlazorTodoApp.Components.Controls;
 
-//     protected string CurrentTodo { get; set; } = string.Empty;
+public partial class TodoInput
+{
+    [Parameter]
+    public EventCallback<string> OnSave { get; set; } 
 
-//     protected void OnTodoInputKeyPress(KeyboardEventArgs e)
-//     {
-//         if (e.Key == "Enter")
-//         {
-//             AddTodo();
-//         }
-//     }
-
-//     protected async void AddTodo()
-//     {
-//         if (!string.IsNullOrWhiteSpace(CurrentTodo))
-//         {
-//             await OnAddTodo.InvokeAsync(CurrentTodo);
-//             CurrentTodo = string.Empty;
-//         }
-//     }
-// }
+    public string CurrentTodo { get; set; } = string.Empty;
+    
+    protected async void OnTodoInputKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await OnSave.InvokeAsync(CurrentTodo);
+            CurrentTodo = string.Empty;
+        }
+    }
+}
