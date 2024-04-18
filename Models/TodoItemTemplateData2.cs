@@ -1,6 +1,6 @@
 namespace blazortodoapp.Models;
 
-public class TodoItemTemplateData(TodoItem item)
+public class TodoItemTemplateData2(TodoItem item)
 {
     public TodoItem Item { get; set; } = item;
     public Action<TodoItem>? OnChanged { get; set; }

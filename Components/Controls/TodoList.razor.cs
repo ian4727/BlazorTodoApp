@@ -31,6 +31,9 @@ public partial class TodoList
     [Parameter]
     public RenderFragment<TodoItemTemplateData>? ItemTemplate { get; set; }
 
+    [Parameter]
+    public RenderFragment<TodoItemTemplateData2>? ItemTemplate2 { get; set; }
+
     protected TodoItemTemplateData GetTodoItemTemplateData(TodoItem item)
     {
         return new TodoItemTemplateData(item)
@@ -68,8 +71,5 @@ public partial class TodoList
     {
         base.OnParametersSet();
         StateHasChanged();
-        //for testing filters
-        // Console.WriteLine($"Filter received in TodoList: {Filter}");
-        // Console.WriteLine($"Number of items received in TodoList: {Items.Count}");
     }
 }
