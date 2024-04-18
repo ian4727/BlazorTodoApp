@@ -53,4 +53,10 @@ public partial class Todo
     {
         TemplateData.OnRemoved?.Invoke(Item);
     }
+
+    //For strikethrough effect
+    protected string GetCompletedClass()
+    {
+        return Item.IsDone ? "completed" : string.Empty;
+    }
 }

@@ -14,14 +14,14 @@
             <li class="todo-li" @ondblclick="OnTodoItemDbClick">
                 <div class="li-left">
                     <input 
-                    class="input-check checkbox-round"
-                    type="checkbox"
-                    @onclick:stopPropagation="true"
-                    @ondblclick:stopPropagation="true"
-                    @onchange="OnTodoItemInputCheckChanged"
-                    checked="@Item.IsDone"
+                        class="input-check checkbox-round"
+                        type="checkbox"
+                        @onclick:stopPropagation="true"
+                        @ondblclick:stopPropagation="true"
+                        @onchange="OnTodoItemInputCheckChanged"
+                        checked="@Item.IsDone"
                     >
-                    <span>@Item.Title</span>
+                    <span class="@GetCompletedClass()">@Item.Title</span>
                 </div>
                 <span class="todo-delete" @onclick="OnTodoItemRemove">x</span>
             </li>
