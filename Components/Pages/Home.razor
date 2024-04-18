@@ -12,12 +12,12 @@
     <h1 class="text-center mb-4">todos</h1>
     <div class="todoapp">
         <TodoInput OnSave="OnTodoInputSave" />
-        <TodoList Items="TodoItems" OnChanged="OnTodoListChanged">
+        <TodoList Items="TodoItems" OnChanged="OnTodoListChanged" Filter="@filter">
             <ItemTemplate Context="TemplateData">
                 <Todo TemplateData="TemplateData"/>
             </ItemTemplate>
         </TodoList>
-        <TodoFooter Items="TodoItems" OnItemRemove="OnTodoItemRemove" />
+        <TodoFooter Items="TodoItems" OnItemRemove="OnTodoItemRemove" OnFilterChanged="OnFilterChanged"/>
     </div>
 </div>
 
@@ -37,11 +37,13 @@
             await InvokeAsync(StateHasChanged);
         }
     }
+
     protected async void OnTodoListChanged(TodoItemChangedEventArgs e)
     {
         await TodoStorageService.SaveTodosAsync(TodoItems);
         await InvokeAsync(StateHasChanged);
     }
+
     protected void OnTodoInputSave(string todo)
     {
         int newId = TodoItems.Count > 0 ? TodoItems.Keys.Max() + 1 : 1;
@@ -54,5 +56,12 @@
     {
         TodoItems.Remove(item.Id);
         OnTodoListChanged(new TodoItemChangedEventArgs(item, TodoItemChangeType.Remove));
+    }
+
+    protected void OnFilterChanged(string filter)
+    {
+        this.filter = filter;
+        // Trigger a re-render
+        StateHasChanged(); 
     }
 }

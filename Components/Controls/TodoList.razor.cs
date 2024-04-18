@@ -75,4 +75,12 @@ public partial class TodoList
             return Enumerable.Empty<KeyValuePair<int, TodoItem>>();
         }
     }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        StateHasChanged();
+        Console.WriteLine($"Filter received in TodoList: {Filter}");
+        Console.WriteLine($"Number of items received in TodoList: {Items.Count}");
+    }
 }

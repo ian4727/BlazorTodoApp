@@ -1,9 +1,13 @@
-<footer class="info">
-    <span class="todo-count">@GetUncompletedItemsCount() item left!</span>
-    <ul class="filters">
-        <li class="filter" @onclick="@(() => HandleFilterClick("All"))">All</li>
-        <li class="filter" @onclick="@(() => HandleFilterClick("Active"))">Active</li>
-        <li class="filter" @onclick="@(() => HandleFilterClick("Completed"))">Completed</li>
-    </ul>
-    <button class="clear-completed" @onclick="ClearCompletedItems">Clear completed</button>
-</footer>
+@if (Items != null && Items.Count > 0)
+{
+    <footer class="info">
+        <span class="todo-count">@GetUncompletedItemsCount() item left!</span>
+        <ul class="filters">
+            <li class="filter" @onclick="@(() => HandleFilterClick("All"))">All</li>
+            <li class="filter" @onclick="@(() => HandleFilterClick("Active"))">Active</li>
+            <li class="filter" @onclick="@(() => HandleFilterClick("Completed"))">Completed</li>
+        </ul>
+        <button class="clear-completed" @onclick="ClearCompletedItems">Clear completed</button>
+    </footer>
+}
+

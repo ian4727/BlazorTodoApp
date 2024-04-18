@@ -6,18 +6,6 @@ namespace BlazorTodoApp.Components.Controls;
 
 public partial class TodoFooter
 {
-    // [Parameter]
-    // public int TotalItems { get; set; }
-
-    // [Parameter]
-    // public int ActiveItems { get; set; }
-
-    // [Parameter]
-    // public int CompletedItems { get; set; }
-
-    // [Parameter]
-    // public EventCallback OnClearCompleted { get; set; }
-
     [Parameter]
     public required Dictionary<int, TodoItem> Items { get; set; }
 
@@ -40,8 +28,11 @@ public partial class TodoFooter
 
     private async Task HandleFilterClick(string filter)
     {
+        Console.WriteLine($"Filter changed to: {filter}");
         Filter = filter;
         await OnFilterChanged.InvokeAsync(filter);
+        // var dummyItem = new TodoItem(-1, "Dummy", false, false); 
+        // await OnChanged.InvokeAsync(new TodoItemChangedEventArgs(dummyItem, TodoItemChangeType.Update));
     }
 
     protected async Task ClearCompletedItems()

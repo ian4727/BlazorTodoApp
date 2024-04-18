@@ -1,5 +1,6 @@
 body{
-    font: 20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font: 23px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 300;
     display: flex;
     justify-content: center;
     padding: 2rem;
@@ -14,31 +15,38 @@ body{
     background: #fff;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
-    min-width: 700px;
+    min-width: 600px;
 }
 
 h1{
     font-size: 80px;
     font-weight: 152;
     color: #b83f45;
+    margin-bottom: 20px;
 }
 
-.input{
-    min-width: 700px;
+.input-field{
+    display: flex;
+    min-width: 600px;
     height: 70px;
     outline: none;
-    text-align: center;
-    font-weight: 300;
+    text-align: left;
+    padding-left: 70px;
 }
 
-    .input::placeholder{
-        font-style: italic;
-        font-size: 30px;
-        font-weight: 90;
-    }
-    .input:focus {
+    .input-field:focus{
         box-shadow: 0 0 10px #b83f45;  
     }
+
+    .input-field::placeholder{
+        font-style: italic;
+        font-size: 25px;
+        font-weight:300;
+    }
+
+.input-toggle{
+    height: 100%;
+}
 
 .todo-list{
     color: rgb(76, 75, 75);
@@ -46,20 +54,31 @@ h1{
 }
 
 .todo{
-    display: flex;
     height: 60px;
     border-top: 0.2px #d2d1d1 solid;
 }
 
+    .todo:hover
+    .todo-delete {
+        display: block;
+    }
+
 .todo-delete{
-    margin-left: auto;
+    display: none;
+    margin-right: 20px;
     color: #898787 ;
     cursor: pointer;
+    font-size: 25px;
+    font-weight: 200;
 }
 
 .todo-li{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-left: 20px;
-    align-content: center;
+
 }
 
 .input-edit{
@@ -82,7 +101,7 @@ h1{
         height: 1.4em;
         border-radius: 50%;
         vertical-align: middle;
-        border: 1px solid #ddd;
+        border: 1px solid #9d9c9c;
         appearance: none;
         -webkit-appearance: none;
         outline: none;
@@ -99,8 +118,6 @@ h1{
     justify-content: space-between;
     align-items: center;
     font-size: 15px;
-    font-weight: 80;
-    /* padding: 15px; */
     height: 50px;
     border-top: 1px rgb(199, 197, 197) solid;
     color: rgb(79, 78, 78);
