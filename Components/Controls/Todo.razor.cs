@@ -42,7 +42,8 @@ public partial class Todo
     //for making the todo item revert back to default once there has been a click somewhere else
     protected void OnEditInputBlur(FocusEventArgs e)
     {
-        Item = Item with { IsEditing = false };
+        TodoItem todoItem = Item with { IsEditing = false };
+        Item = todoItem;
         TemplateData.OnChanged?.Invoke(Item);
     }
 

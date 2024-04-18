@@ -1,17 +1,14 @@
 <main class="main">
     <ul class="todo-list">
-        @foreach (var pair in FilterItems(Items))
+        @if (ItemTemplate != null)
         {
-            var id = pair.Key;
-            var todoItem = pair.Value;
-            if(ItemTemplate is null)
+            @foreach (var pair in FilterItems(Items))
             {
-                <li>Please provide a Template</li>
-            }
-            else
-            {
+                var id = pair.Key;
+                var todoItem = pair.Value;
                 @ItemTemplate(GetTodoItemTemplateData(todoItem))
             }
         }
     </ul>
 </main>
+

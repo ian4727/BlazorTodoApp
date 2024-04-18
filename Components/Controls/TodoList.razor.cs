@@ -69,7 +69,7 @@ public partial class TodoList
         base.OnParametersSet();
         StateHasChanged();
         //for testing filters
-        Console.WriteLine($"Filter received in TodoList: {Filter}");
-        Console.WriteLine($"Number of items received in TodoList: {Items.Count}");
+        // Console.WriteLine($"Filter received in TodoList: {Filter}");
+        // Console.WriteLine($"Number of items received in TodoList: {Items.Count}");
     }
 }

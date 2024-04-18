@@ -19,8 +19,8 @@ body{
 }
 
 h1{
-    font-size: 70px;
-    font-weight: 152;
+    font-size: 75px;
+    font-weight: 151;
     color: #b83f45;
     margin-bottom: 20px;
 }
@@ -82,7 +82,7 @@ h1{
 
     .completed {
         text-decoration: line-through;
-        color: rgb(114, 113, 113);
+        color: rgb(130, 129, 129);
     }
 
 .input-edit{

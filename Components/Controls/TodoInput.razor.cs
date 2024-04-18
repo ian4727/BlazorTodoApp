@@ -11,7 +11,7 @@ public partial class TodoInput
 
     public string CurrentTodo { get; set; } = string.Empty;
     
-    protected async void OnTodoInputKeyPress(KeyboardEventArgs e)
+    protected async Task OnTodoInputKeyPress(KeyboardEventArgs e)
     {
         if (e.Key == "Enter")
         {
