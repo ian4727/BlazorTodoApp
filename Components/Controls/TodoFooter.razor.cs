@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Components;
 using blazortodoapp.Models;
-using Microsoft.AspNetCore.Components.Forms;
 
 namespace BlazorTodoApp.Components.Controls;
 
@@ -31,8 +30,6 @@ public partial class TodoFooter
         Console.WriteLine($"Filter changed to: {filter}");
         Filter = filter;
         await OnFilterChanged.InvokeAsync(filter);
-        // var dummyItem = new TodoItem(-1, "Dummy", false, false); 
-        // await OnChanged.InvokeAsync(new TodoItemChangedEventArgs(dummyItem, TodoItemChangeType.Update));
     }
 
     protected async Task ClearCompletedItems()

@@ -6,7 +6,7 @@
 
 @rendermode InteractiveServer
 
-<PageTitle>To-do List App</PageTitle>
+<PageTitle>To-do List</PageTitle>
 
 <div class="wrapper">
     <h1>todos</h1>
@@ -27,7 +27,7 @@
 
     protected Dictionary<int, TodoItem> TodoItems { get; set; } = [];
 
-    protected string filter = "All"; // test code
+    protected string filter = "All";
     
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -61,7 +61,6 @@
     protected void OnFilterChanged(string filter)
     {
         this.filter = filter;
-        // Trigger a re-render
         StateHasChanged(); 
     }
 }

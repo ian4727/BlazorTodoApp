@@ -8,7 +8,6 @@ namespace BlazorTodoApp.Components.Controls;
 public partial class Todo
 {
     [Parameter, EditorRequired]
-
     public required TodoItemTemplateData TemplateData { get; set; }
 
     public TodoItem Item
@@ -38,6 +37,13 @@ public partial class Todo
             Item = Item with { IsEditing = false };
             TemplateData.OnChanged?.Invoke(Item);
         }
+    }
+
+    //for making the todo item revert back to default once there has been a click somewhere else
+    protected void OnEditInputBlur(FocusEventArgs e)
+    {
+        Item = Item with { IsEditing = false };
+        TemplateData.OnChanged?.Invoke(Item);
     }
 
     //for tracking whether the checkbox is ticked or not

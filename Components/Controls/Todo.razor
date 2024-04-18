@@ -6,6 +6,7 @@
                 type="text"
                 @oninput="OnTodoEditingInput"
                 @onkeypress="OnTodoEditingItemKeyPress"
+                @onblur="OnEditInputBlur"
                 value="@Item.Title"
             />
         }
