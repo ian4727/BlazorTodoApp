@@ -1,5 +1,10 @@
-<div class="todo-v2" @onmouseover="ShowDeleteButton" @onmouseout="HideDeleteButton">
-    <span class="todo-title">@TemplateDataV2.Item.Title</span>
-    <span class="todo-delete" @onclick="OnTodoItemRemove">x</span>
+<div class="todo">
+    <TodoTemplate TItem="TodoItemTemplateData2" Item="Item" RowTemplate="@(templateData => 
+    {
+        <div>
+            <span class="@GetCompletedClass()">@Item.Title</span>
+            <button @onclick="OnTodoItemEdit">Edit</button>
+            <button @onclick="OnTodoItemRemove">Delete</button>
+        </div>
+    })" />
 </div>
-

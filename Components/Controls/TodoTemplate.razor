@@ -1,0 +1,67 @@
+@* @typeparam TItem
+<div class="todo">
+    @if(Item.IsEditing)
+        {
+            <input
+                class="input-edit"
+                type="text"
+                @oninput="OnTodoEditingInput"
+                @onkeypress="OnTodoEditingItemKeyPress"
+                @onblur="OnEditInputBlur"
+                value="@Item.Title"
+            />
+        }
+        else
+        {
+            @RowTemplate(Item)
+        }
+</div>
+     *@
+@typeparam TItem
+<div class="todo">
+    @switch(LayoutType)
+    {
+        case "default":
+            @if(Item.IsEditing)
+            {
+                <input
+                class="input-edit"
+                type="text"
+                @oninput="OnTodoEditingInput"
+                @onkeypress="OnTodoEditingItemKeyPress"
+                @onblur="OnEditInputBlur"
+                value="@Item.Title"
+                />
+            }
+            else
+            {
+                @RowTemplate(Item)
+            }
+            break;
+        case "withButtons":
+            // Render the version with Delete and Edit buttons
+            <div>
+                <span @onclick="OnTodoItemRemove">Delete</span>
+                <span @onclick="OnTodoItemDbClick">Edit</span>
+                @if(Item.IsEditing)
+                {
+                    <input
+                        class="input-edit"
+                        type="text"
+                        @oninput="OnTodoEditingInput"
+                        @onkeypress="OnTodoEditingItemKeyPress"
+                        @onblur="OnEditInputBlur"
+                        value="@Item.Title"
+                    />
+                }
+                else
+                {
+                    @RowTemplate(Item)
+                }
+            </div>
+            break;
+        default:
+            <p>Invalid layout type</p>
+            break;
+    }
+</div>
