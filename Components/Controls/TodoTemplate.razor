@@ -1,67 +1,59 @@
-@* @typeparam TItem
-<div class="todo">
-    @if(Item.IsEditing)
-        {
-            <input
-                class="input-edit"
-                type="text"
-                @oninput="OnTodoEditingInput"
-                @onkeypress="OnTodoEditingItemKeyPress"
-                @onblur="OnEditInputBlur"
-                value="@Item.Title"
-            />
-        }
-        else
-        {
-            @RowTemplate(Item)
-        }
+@using System.Diagnostics.CodeAnalysis
+
+<div class="text-lg h-16 border-t border-gray-200 border-solid group">
+    @ChildContent
 </div>
-     *@
-@typeparam TItem
-<div class="todo">
-    @switch(LayoutType)
+@if (Item.IsEditing)
+{
+    <div class="ml-2">
+        <input
+            class="w-full h-[60px] outline-none focus:shadow-outline-red pl-5"
+            type="text"
+            @oninput="OnTodoEditingInput"
+            @onkeypress="OnTodoEditingItemKeyPress"
+            @onblur="OnEditInputBlur"
+            value="@Item.Title"/>
+    </div>
+}
+else
+{
+    <li
+        class="h-full flex items-center justify-between ml-2"
+        @ondblclick="OnTodoItemDbClick">
+        @ChildContent
+    </li>
+}
+
+@code {
+    [Parameter, AllowNull] public RenderFragment ChildContent { get; set; }
+    [Parameter, AllowNull] public TodoItem Item { get; set; }
+    [Parameter] public EventCallback<TodoItem> OnChanged { get; set; }
+    [Parameter] public EventCallback<TodoItem> OnRemoved { get; set; }
+
+    protected void OnTodoEditingInput(ChangeEventArgs e)
     {
-        case "default":
-            @if(Item.IsEditing)
-            {
-                <input
-                class="input-edit"
-                type="text"
-                @oninput="OnTodoEditingInput"
-                @onkeypress="OnTodoEditingItemKeyPress"
-                @onblur="OnEditInputBlur"
-                value="@Item.Title"
-                />
-            }
-            else
-            {
-                @RowTemplate(Item)
-            }
-            break;
-        case "withButtons":
-            // Render the version with Delete and Edit buttons
-            <div>
-                <span @onclick="OnTodoItemRemove">Delete</span>
-                <span @onclick="OnTodoItemDbClick">Edit</span>
-                @if(Item.IsEditing)
-                {
-                    <input
-                        class="input-edit"
-                        type="text"
-                        @oninput="OnTodoEditingInput"
-                        @onkeypress="OnTodoEditingItemKeyPress"
-                        @onblur="OnEditInputBlur"
-                        value="@Item.Title"
-                    />
-                }
-                else
-                {
-                    @RowTemplate(Item)
-                }
-            </div>
-            break;
-        default:
-            <p>Invalid layout type</p>
-            break;
+        Item = Item with { Title = e.Value?.ToString() ?? string.Empty };
+        OnChanged.InvokeAsync(Item);
     }
-</div>
+
+    protected void OnTodoEditingItemKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            Item = Item with { IsEditing = false };
+            OnChanged.InvokeAsync(Item);
+        }
+    }
+
+    protected void OnEditInputBlur(FocusEventArgs e)
+    {
+        Item = Item with { IsEditing = false };
+        OnChanged.InvokeAsync(Item);
+    }
+
+    protected void OnTodoItemDbClick(MouseEventArgs e)
+    {
+        Item = Item with { IsEditing = true };
+        OnChanged.InvokeAsync(Item);
+    }
+}

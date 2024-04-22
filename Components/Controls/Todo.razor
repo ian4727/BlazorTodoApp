@@ -1,31 +1,31 @@
-@* <div class="todo">
-    @if(Item.IsEditing)
-        {
-            <input
-                class="input-edit"
-                type="text"
-                @oninput="OnTodoEditingInput"
-                @onkeypress="OnTodoEditingItemKeyPress"
-                @onblur="OnEditInputBlur"
-                value="@Item.Title"
-            />
-        }
-        else
-        {
-            <li class="todo-li" @ondblclick="OnTodoItemDbClick">
-                <div class="li-left">
-                    <input 
-                        class="input-check checkbox-round"
-                        type="checkbox"
-                        @onclick:stopPropagation="true"
-                        @ondblclick:stopPropagation="true"
-                        @onchange="OnTodoItemInputCheckChanged"
-                        checked="@Item.IsDone"
-                    >
-                    <span class="@GetCompletedClass()">@Item.Title</span>
-                </div>
-                <span class="todo-delete" @onclick="OnTodoItemRemove">x</span>
-            </li>
-        }
-</div>
-     *@
+@code {
+    [Parameter] public TodoItem Item { get; set; }
+    [Parameter] public EventCallback<TodoItem> OnChanged { get; set; }
+    [Parameter] public EventCallback<TodoItem> OnRemoved { get; set; }
+    [Parameter] public Func<string> GetCheckboxBorderClass { get; set; }
+    [Parameter] public EventCallback OnToggleTodoItem { get; set; }
+    [Parameter] public EventCallback OnTodoItemRemove { get; set; }
+}
+
+<TodoTemplate Item="Item" OnChanged="OnChanged" OnRemoved="OnRemoved">
+    <div class="checkbox li-left flex items-center ">
+        <div
+            class="rounded-full w-6 h-6 border @GetCheckboxBorderClass() flex items-center justify-center mr-4"
+            @onclick:stopPropagation="true"
+            @ondblclick:stopPropagation="true"
+            @onclick="@(async () => await OnToggleTodoItem.InvokeAsync())">
+            @if (Item.IsDone)
+            {
+                <img src="/images/check.png" alt="Checked" class="w-4 h-4" />
+            }
+        </div>
+        <span class="@(Item.IsDone ? "line-through text-gray-500" : "")">
+            @Item.Title
+        </span>
+    </div>
+    <span
+        class="todo-delete hidden mr-5 text-gray-500 cursor-pointer text-xl font-light group-hover:block"
+        @onclick="@(async () => await OnTodoItemRemove.InvokeAsync())">
+        x
+    </span>
+</TodoTemplate>
