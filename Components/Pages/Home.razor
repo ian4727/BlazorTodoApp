@@ -8,16 +8,16 @@
 
 <PageTitle>To-do List</PageTitle>
 
-<div class="wrapper">
-    <h1>todos</h1>
-    <div class="todoapp">
+<div class="text-center">
+    <h1 class="text-7xl font-extralight text-red-800 mb-5">todos</h1>
+    <div class="bg-white shadow-md min-w-[600px]">
         <TodoInput OnSave="OnTodoInputSave" />
         <TodoList Items="TodoItems" OnChanged="OnTodoListChanged" Filter="@filter">
             <ItemTemplate Context="TemplateData">
-                <Todo TemplateData="TemplateData"/>
+                <Todo TemplateData="TemplateData" />
             </ItemTemplate>
         </TodoList>
-        <TodoFooter Items="TodoItems" OnItemRemove="OnTodoItemRemove" OnFilterChanged="OnFilterChanged"/>
+        <TodoFooter Items="TodoItems" OnItemRemove="OnTodoItemRemove" OnFilterChanged="OnFilterChanged" />
     </div>
 </div>
 
@@ -29,18 +29,18 @@
     protected Dictionary<int, TodoItem> TodoItems { get; set; } = [];
 
     protected string filter = "All";
-    
+
     //life cycle method
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if(firstRender)
+        if (firstRender)
         {
             TodoItems = await TodoStorageService.GetTodoAsync();
             await InvokeAsync(StateHasChanged);
         }
     }
 
-    //event handlers 
+    //event handlers
     protected async void OnTodoListChanged(TodoItemChangedEventArgs e)
     {
         await TodoStorageService.SaveTodosAsync(TodoItems);
@@ -53,7 +53,7 @@
         TodoItem item = new(newId, todo, false, false);
         TodoItems.Add(item.Id, item);
         OnTodoListChanged(new TodoItemChangedEventArgs(item, TodoItemChangeType.Add));
-    } 
+    }
 
     protected void OnTodoItemRemove(TodoItem item)
     {
@@ -64,6 +64,6 @@
     protected void OnFilterChanged(string filter)
     {
         this.filter = filter;
-        StateHasChanged(); 
+        StateHasChanged();
     }
 }

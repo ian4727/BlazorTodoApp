@@ -1,31 +1,39 @@
-<div class="todo">
-    @if(Item.IsEditing)
-        {
-            <input
-                class="input-edit"
-                type="text"
-                @oninput="OnTodoEditingInput"
-                @onkeypress="OnTodoEditingItemKeyPress"
-                @onblur="OnEditInputBlur"
-                value="@Item.Title"
-            />
-        }
-        else
-        {
-            <li class="todo-li" @ondblclick="OnTodoItemDbClick">
-                <div class="li-left">
-                    <input 
-                        class="input-check checkbox-round"
-                        type="checkbox"
-                        @onclick:stopPropagation="true"
-                        @ondblclick:stopPropagation="true"
-                        @onchange="OnTodoItemInputCheckChanged"
-                        checked="@Item.IsDone"
-                    >
-                    <span class="@GetCompletedClass()">@Item.Title</span>
+<div class="text-lg h-16 border-t border-gray-200 border-solid group">
+    @if (Item.IsEditing)
+    {
+        <input
+            class="w-full h-[60px] outline-none focus:shadow-outline-red pl-12"
+            type="text"
+            @oninput="OnTodoEditingInput"
+            @onkeypress="OnTodoEditingItemKeyPress"
+            @onblur="OnEditInputBlur"
+            value="@Item.Title"
+        />
+    }
+    else
+    {
+        <li
+            class="h-full flex items-center justify-between ml-2"
+            @ondblclick="OnTodoItemDbClick">
+            <div class="checkbox li-left flex items-center ">
+                <div
+                    class="rounded-full w-6 h-6 border @GetCheckboxBorderClass() flex items-center justify-center mr-4"
+                    @onclick:stopPropagation="true"
+                    @ondblclick:stopPropagation="true"
+                    @onclick="OnToggleTodoItem">
+                    @if (Item.IsDone)
+                    {
+                        <img src="/images/check.png" alt="Checked" class="w-4 h-4" />
+                    }
                 </div>
-                <span class="todo-delete" @onclick="OnTodoItemRemove">x</span>
-            </li>
-        }
+                <span class="@(Item.IsDone ? "line-through text-gray-500" : "")">
+                    @Item.Title
+                </span>
+            </div>
+            <span class="todo-delete hidden mr-5 text-gray-500 cursor-pointer text-xl font-light group-hover:block"
+                @onclick="OnTodoItemRemove">
+                x
+            </span>
+        </li>
+    }
 </div>
-    

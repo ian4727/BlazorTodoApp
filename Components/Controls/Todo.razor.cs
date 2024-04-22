@@ -48,22 +48,26 @@ public partial class Todo
     }
 
     //for tracking whether the checkbox is ticked or not
-    protected void OnTodoItemInputCheckChanged(ChangeEventArgs e)
+    // protected void OnTodoItemInputCheckChanged(ChangeEventArgs e)
+    // {
+    //     string isCheckedString = e.Value?.ToString()?.ToLowerInvariant() ?? "false";
+    //     Item = Item with { IsDone = bool.Parse(isCheckedString) };
+    //     TemplateData.OnChanged?.Invoke(Item);
+    //     Console.WriteLine("This item is clicked");
+    // }
+    protected string GetCheckboxBorderClass() => Item.IsDone ? "border-green-500" : "border-gray-300";
+
+    //for tracking whether the checkbox is ticked or not
+    protected void OnToggleTodoItem()
     {
-        string isCheckedString = e.Value?.ToString()?.ToLowerInvariant() ?? "false";
-        Item = Item with { IsDone = bool.Parse(isCheckedString) };
+        Item = Item with { IsDone = !Item.IsDone };
         TemplateData.OnChanged?.Invoke(Item);
+        Console.WriteLine("This item is clicked");
     }
-    
+
     //for deleting an item once x is clicked
     protected void OnTodoItemRemove(MouseEventArgs e)
     {
         TemplateData.OnRemoved?.Invoke(Item);
-    }
-
-    //For strikethrough effect
-    protected string GetCompletedClass()
-    {
-        return Item.IsDone ? "completed" : string.Empty;
     }
 }
