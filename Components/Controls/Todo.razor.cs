@@ -47,14 +47,6 @@ public partial class Todo
         TemplateData.OnChanged?.Invoke(Item);
     }
 
-    //for tracking whether the checkbox is ticked or not
-    // protected void OnTodoItemInputCheckChanged(ChangeEventArgs e)
-    // {
-    //     string isCheckedString = e.Value?.ToString()?.ToLowerInvariant() ?? "false";
-    //     Item = Item with { IsDone = bool.Parse(isCheckedString) };
-    //     TemplateData.OnChanged?.Invoke(Item);
-    //     Console.WriteLine("This item is clicked");
-    // }
     protected string GetCheckboxBorderClass() => Item.IsDone ? "border-green-500" : "border-gray-300";
 
     //for tracking whether the checkbox is ticked or not
