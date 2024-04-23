@@ -14,7 +14,7 @@ public class TodoStorageService(IJSRuntime jSRuntime)
     public async Task<Dictionary<int, TodoItem>> GetTodoAsync()
     {
         string? todos = await jSRuntime.InvokeAsync<string?>("localStorage.getItem", "todos");
-            if(string.IsNullOrWhiteSpace(todos)) return [];
-            return JsonSerializer.Deserialize<Dictionary<int, TodoItem>>(todos) ?? [];
+        if(string.IsNullOrWhiteSpace(todos)) return [];
+        return JsonSerializer.Deserialize<Dictionary<int, TodoItem>>(todos) ?? [];
     }
 }
