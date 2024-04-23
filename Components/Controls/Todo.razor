@@ -1,4 +1,4 @@
-<div class="text-lg h-16 border-t border-gray-200 border-solid group">
+<div class="text-[23px] h-16 border-t border-gray-200 border-solid group">
     @if (Item.IsEditing)
     {
         <input
@@ -13,11 +13,11 @@
     else
     {
         <li
-            class="h-full flex items-center justify-between ml-2"
+            class="h-full flex items-center justify-between ml-2 "
             @ondblclick="OnTodoItemDbClick">
             <div class="checkbox li-left flex items-center ">
                 <div
-                    class="rounded-full w-6 h-6 border @GetCheckboxBorderClass() flex items-center justify-center mr-4"
+                    class="rounded-full w-8 h-8 border @GetCheckboxBorderClass() flex items-center justify-center mr-4"
                     @onclick:stopPropagation="true"
                     @ondblclick:stopPropagation="true"
                     @onclick="OnToggleTodoItem">

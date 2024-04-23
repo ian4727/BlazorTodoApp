@@ -1,31 +1,36 @@
 @if (Items != null && Items.Count > 0)
 {
-    <footer class="text-xs flex justify-between items-center text-base font-light h-[50px] border-t border-[rgb(199, 197, 197)] text-[rgb(79, 78, 78)]">
-        <span class="todo-count ml-7">
-            @GetUncompletedItemsCount() item left!
-        </span>
-        <ul class="w-36 flex justify-between">
-            <li
-                class="filter p-2 cursor-pointer hover:border hover:border-red-800 hover:border-opacity-100 hover:rounded"
-                @onclick="@(() => HandleFilterClick("All"))">
-                All
-            </li>
-            <li
-                class="filter p-2 cursor-pointer hover:border hover:border-red-800 hover:border-opacity-100 hover:rounded"
-                @onclick="@(() => HandleFilterClick("Active"))">
-                Active
-            </li>
-            <li
-                class="filter p-2 cursor-pointer hover:border hover:border-red-800 hover:border-opacity-100 hover:rounded"
-                @onclick="@(() => HandleFilterClick("Completed"))">
-                Completed
-            </li>
-        </ul>
-        <button
-            class="mr-7 hover:underline"
-            @onclick="ClearCompletedItems">
-            Clear completed
-        </button>
-    </footer>
+    <div class="relative">
+        <div class="text-[14px] flex justify-between items-center text-base font-light h-[40px] border-t border-b border-[rgb(199, 197, 197)] text-gray-700 shadow">
+            <span class="todo-count ml-7">
+                @GetUncompletedItemsCount() item left!
+            </span>
+            <ul class="w-36 flex justify-between">
+                <li
+                    class="filter p-[2px] cursor-pointer hover:border hover:border-red-800 hover:rounded"
+                    @onclick="@(() => HandleFilterClick("All"))">
+                    All
+                </li>
+                <li
+                    class="filter p-[2px] cursor-pointer hover:border hover:border-red-800 hover:rounded"
+                    @onclick="@(() => HandleFilterClick("Active"))">
+                    Active
+                </li>
+                <li
+                    class="filter p-[2px] cursor-pointer hover:border hover:border-red-800 hover:rounded"
+                    @onclick="@(() => HandleFilterClick("Completed"))">
+                    Completed
+                </li>
+            </ul>
+            <button
+                class="mr-7 hover:underline"
+                @onclick="ClearCompletedItems">
+                Clear completed
+            </button>
+        </div>
+        
+        <div class="absolute left-1/2 transform -translate-x-1/2 w-[565px] h-[5px] bg-white shadow-md z-10"></div>
+        <div class="absolute left-1/2 transform -translate-x-1/2 w-[555px] h-[5px] bg-white shadow-md z-10" style="top: 46px;"></div>
+        
+    </div>
 }
-

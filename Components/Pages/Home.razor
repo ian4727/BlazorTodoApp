@@ -9,16 +9,20 @@
 <PageTitle>To-do List</PageTitle>
 
 <div class="text-center">
-    <h1 class="text-7xl font-extralight text-red-800 mb-5">todos</h1>
-    <div class="bg-white shadow-md min-w-[600px]">
+    <header>
+        <h1 class="text-[80px] font-[80] text-[#b83f45] mb-4">todos</h1>
+    </header>
+    <main class="bg-white shadow-md min-w-[570px]">
         <TodoInput OnSave="OnTodoInputSave" />
         <TodoList Items="TodoItems" OnChanged="OnTodoListChanged" Filter="@filter">
             <ItemTemplate Context="TemplateData">
                 <Todo TemplateData="TemplateData" />
             </ItemTemplate>
         </TodoList>
+    </main>
+    <footer class="bg-white shadow-md min-w-[570px] ">
         <TodoFooter Items="TodoItems" OnItemRemove="OnTodoItemRemove" OnFilterChanged="OnFilterChanged" />
-    </div>
+    </footer>   
 </div>
 
 @code {
@@ -30,7 +34,6 @@
 
     protected string filter = "All";
 
-    //life cycle method
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -40,7 +43,6 @@
         }
     }
 
-    //event handlers
     protected async void OnTodoListChanged(TodoItemChangedEventArgs e)
     {
         await TodoStorageService.SaveTodosAsync(TodoItems);
